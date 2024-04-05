@@ -180,11 +180,11 @@ The KPI's for orders and profit are made in the same way but with their respecti
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/92566672-055e-45c2-a5e6-4f055168e820)
 
-###Page View:
+### Page View:
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/b25fcea6-55b4-4cb1-bb19-deb101e70b1c)
 
-##The Product Detail Page
+## The Product Detail Page
 
 The purpose of this page is provide an in-depth look at which products within the inventory are performing well, with the option to filter by product and region.
 
@@ -242,7 +242,8 @@ A button at the top of the navigation bar is used to open the slicer panel with 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/a6db0f2f-f64c-4c7d-aefa-fed3d72a6ecc)
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/66e2b3b2-6b7f-47fa-a00a-c5f9a871b4d4)
 
-##Store Map Page
+## Store Map Page
+
 **Map Visual**: The Geography hierarchy is assigned to the Location field, and ProfitYTD to the Bubble size field.
 
 The controls of the map are as follows:
@@ -268,7 +269,7 @@ The drillthough page can be seen below.
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/8f126434-8b65-492c-bae6-15b840be75e9)
 
-##Cross-Filtering and Navigation
+## Cross-Filtering and Navigation
 **The cross-filtering:**
 
 1. Executive Summary Page: Product Category bar chart and Top 10 Products table have been changed to not filter the card visuals or KPIs
@@ -284,7 +285,7 @@ The drillthough page can be seen below.
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/6a9ba21d-c859-4a38-a0b4-e4d6c77723ca)
 
-##Metrics for Users Outside the Company Using SQL
+## Metrics for Users Outside the Company Using SQL
 The data is stored on a Postgres database server hosted on Microsoft Azure.
 
 The table and column names in this database are different from the ones in Power BI.
