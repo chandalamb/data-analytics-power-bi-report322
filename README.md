@@ -28,22 +28,23 @@ This project involves importing multiple data tables through various methods.
 
 The following columns are then added to the date table:
 
-Day of Week = FORMAT([Date], "dddd")
-Month Number (i.e. Jan = 1, Dec = 12 etc.) = [Date].[MonthNo]
-Month Name = [Date].[Month]
-Quarter = [Date].[Quarter]
-Year = [Date].[Year]
-Start of Year = STARTOFYEAR(Dates[Date])
-Start of Quarter = STARTOFQUARTER(Dates[Date])
-Start of Month = STARTOFMONTH(Dates[Date])
-Start of Week = [Date] - WEEKDAY([Date], 2) + 1
+- Day of Week = FORMAT([Date], "dddd")
+- Month Number (i.e. Jan = 1, Dec = 12 etc.) = [Date].[MonthNo]
+- Month Name = [Date].[Month]
+- Quarter = [Date].[Quarter]
+- Year = [Date].[Year]
+- Start of Year = STARTOFYEAR(Dates[Date])
+- Start of Quarter = STARTOFQUARTER(Dates[Date])
+- Start of Month = STARTOFMONTH(Dates[Date])
+- Start of Week = [Date] - WEEKDAY([Date], 2) + 1
+
 Schema: The relationships should form a star schema as follows:
 
-Orders[product_code] to Products[product_code]
-Orders[Store Code] to Stores[store code]
-Orders[User ID] to Customers[User UUID]
-Orders[Order Date] to Date[date]
-Orders[Shipping Date] to Date[date]
+- Orders[product_code] to Products[product_code]
+- Orders[Store Code] to Stores[store code]
+- Orders[User ID] to Customers[User UUID]
+- Orders[Order Date] to Date[date]
+- Orders[Shipping Date] to Date[date]
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/7c153e3d-5bc9-4ef9-b055-b6470cfdf2c0)
 
@@ -51,24 +52,31 @@ Orders[Shipping Date] to Date[date]
 
 The first addition to this table will be some of the key measures:
 - Total Orders that counts the number of orders in the Orders table.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/8b911fc0-23ab-48a5-ba3a-3b5c7f642c57)
 
 - Total Revenue that multiplies the Orders[Product Quantity] column by the Products[Sale_Price] column for each row, and then sums the result.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/3343a31b-4433-4d08-bb14-34f94fb4798a)
 
 - Total Profit which performs the following calculation: For each row, subtract the Products[Cost_Price] from the Products[Sale_Price], and then multiply the result by the Orders[Product Quantity]. Sums the result for all rows.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/31f5ecbc-1590-47a3-93bc-089ab3a1e995)
 
 - Total Customers that counts the number of unique customers in the Orders table. This measure needs to change as the Orders table is filtered, so do not just count the rows of the Customers table.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/3b1f3304-7a11-41cf-b021-863d6cf4b934)
 
 - Total Quantity that counts the number of items sold in the Orders table.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/021f7d27-f9ed-41ed-adfa-01e8d6bce4f3)
 
 - Profit YTD that calculates the total profit for the current year.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/1d827453-2e3f-46e2-9574-40862d9af04d)
 
 - Revenue YTD that calculates the total revenue for the current year.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/be375ab0-171e-4d47-b4f2-cfd9a69799d5)
 
 **Date and Geography Hierarchies**:
@@ -96,27 +104,36 @@ The page provides an in-depth look at which Customers from all stores are spendi
 For the **Unique Customers visual**, add a card visual for the [Total Customers] measure and rename the field.
 
 For the **Revenue per Customer visual**, a new [Revenue per Customer] measure is needed. This should be the [Total Revenue] divided by the [Total Customers].
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/ca29e6bb-4c33-4d37-b4b7-d7bd25b59e20)
 
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/94d7b03a-3ebe-43c8-abc6-cf2872561dc9)
 
 **Summary Charts**: These charts can be found underneath the card visuals. Each chart will provide information about the total customers.
 - The **Donut Chart** visual created shows the total customers for each country, using the Users[Country] column to filter the [Total Customers] measure.
+- 
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/827fdd23-3ac7-4db8-abec-2c2cb7bf0844)
+  
 - The **Column Chart** visual shows the number of customers who purchased each product category, using the Products[Category] column to filter the [Total Customers] measure.
+  
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/6a3273aa-0411-44dc-846e-5b9af5eaa5d8)
   
 - **Line Chart**: The Line Chart visual shows [Total Customers] on the Y axis, and the Date Hierarchy for the X axis. Allowing users to drill down to the month level, but not to weeks or individual dates. With the addition of a trend line, and a forecast for the next 10 periods with a 95% confidence interval.
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/99d04595-52a3-4db0-8c0b-db5ab208b3af)
+  
 - **Top 20 Customers Table**: This displays the top 20 customers, filtered by revenue. It shows each customer's full name, revenue, and number of orders. Conditional formatting has been applied to the revenue column, to display data bars for the revenue values (seen in green in the image below). This makes it much clearer to see which customer has brought in the most revenue.
   ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/ceb722cd-04ef-445c-ae4e-83a6ae23c875)
+  
 - **Top Customer Cards**: A set of three card visuals that provide insights into the top customer by revenue. They display the top customer's name, the number of orders made by the customer, and the total revenue generated by the customer.
+  
 - ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/8a97b0af-3893-4bd9-ae26-ef56805a22b4)
 
 **Date Slicer**: A slicer in the between slicer style to allow users to filter the page by year.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/dd0ae183-2f57-4527-acdc-fbff6f91a4b5)
 
 **Page View**:
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/f9d38eb8-ad89-498b-bb48-27310c99f4ef)
 
 ## The Executive Summary Page
@@ -124,16 +141,22 @@ For the **Revenue per Customer visual**, a new [Revenue per Customer] measure is
 This page gives an overview of the company's performance as a whole, so that C-suite executives can quickly get insights and check outcomes against key targets.
 
 **Card Visuals**: Three cards that span about half of the width of the page. One for Total Revenue, Total Orders and Total Profit measures. Using the Format > Callout Value pane to ensure no more than 2 decimal places in the case of the revenue and profit cards, and only 1 decimal place in the case of the Total Orders measure.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/0a8a646d-aa6f-4403-ab8d-b30bb610549c)
 
 **Line Chart**: A copy of the line graph from the Customer Detail page, with the following changes:
 
 - X axis set to the Date Hierarchy, with only the Start of Year, Start of Quarter and Start of Month levels displayed
 - Y axis set to the Total Revenue
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/530ec21f-de9b-4bb6-8007-e7c2ab21cc54)
+
 **Donut Charts**: A pair of donut charts, showing Total Revenue broken down by Store[Country] and Store[Store Type] respectively.
+  
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/063502bb-be88-4f97-a7dc-be971b9a9f2e)
+
 **Bar Chart**: A bar chart showing number of orders by product category. This can be completed quickly using the a copy of the Total Customers by Product Category donut chart from the Customer Detail page. Using the on-object Build a visual pane and changing the visual type to Clustered bar chart.Also the X axis field needs to be changed from Total Customers to Total Orders.
+  
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/d3027fe5-fa30-4686-b81a-96c07c271e24)
 
 **KPI Visuals**: To make KPIs for Quarterly Revenue, Orders and Profit a set of new measures for the quarterly targets need me be made. These measure are:
@@ -154,9 +177,11 @@ In the Format pane,the values are set as follows:
 - The Callout Value set to show only to 1 decimal place.
 
 The KPI's for orders and profit are made in the same way but with their respective Total's and Target's.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/92566672-055e-45c2-a5e6-4f055168e820)
 
 ###Page View:
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/b25fcea6-55b4-4cb1-bb19-deb101e70b1c)
 
 ##The Product Detail Page
@@ -166,6 +191,7 @@ The purpose of this page is provide an in-depth look at which products within th
 **Gauge Visuals**: A set of three gauges, showing the current-quarter performance of Orders, Revenue and Profit against a quarterly target, with a 10% quarter-on-quarter growth target in all three metrics.
 
 To achieve this new DAX measures for the three metrics, and for the quarterly targets of each metric. The DAX formula for Revenue provided below.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/5f1b989a-8b9e-4d23-8b58-0f8d0d9955c3)
 
 The maximum value of the gauges are set to the target, so that the gauge shows as full when the target is met. Conditional formatting is applied to the callout value (the number in the middle of the gauge), so that it shows as red if the target is not yet met, and blue otherwise.
@@ -173,6 +199,7 @@ The maximum value of the gauges are set to the target, so that the gauge shows a
 (This space is for a screen shot of the Gauge Visuals once they are working)
 
 **Card Visuals**: For this page, two card visuals are used to display the top product by both total revenue and orders. This is achieved by using the filter pane and filtering Product[Description] by revenue and orders respectively then setting the filter type to Top N and then setting N to one.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/1afafb53-d13f-43cd-97ca-4fb9dff079d1)
 
 **Area Chart**: An area chart that shows how the different product categories are performing in terms of revenue over time.
@@ -197,6 +224,7 @@ This chart shows that there are clearly two categories (homeware and toys-and-ga
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/bc065a1a-9b8c-4b96-becd-4aef91464e72)
 
 **Scatter Graph**: This visual shows which product ranges are both top-selling items and also profitable. For this a new calculated column [Profit per Item] is needed in the Products table.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/1659e935-bc8e-4b67-8a0b-ba568eece88c)
 
 The visual is configured as follows:
@@ -237,6 +265,7 @@ The drillthough page can be seen below.
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/29ba9607-4816-4e4b-b194-769a02c72364)
 
 **Stores Tooltip**: This is what pops up when a location on the map visual is hoverd over. It consists of the profit guage and the store card visuals.
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/8f126434-8b65-492c-bae6-15b840be75e9)
 
 ##Cross-Filtering and Navigation
@@ -252,6 +281,7 @@ The drillthough page can be seen below.
 3. Product Detail Page: Orders vs. Profitability scatter graph and Top 10 Products table no longer filter any other visuals.
 
 **Navigation Bar:** The navigation bar consists of four buttons for the individual report pages. There is a white version for the default button appearance, and a blue one so that the button changes colour when hovered over with the mouse pointer. (These are the ones mentioned in the slicer toolbar section above).
+
 ![image](https://github.com/chandalamb/data-analytics-power-bi-report322/assets/154320747/6a9ba21d-c859-4a38-a0b4-e4d6c77723ca)
 
 ##Metrics for Users Outside the Company Using SQL
